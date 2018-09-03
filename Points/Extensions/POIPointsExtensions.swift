@@ -50,4 +50,11 @@ extension Array where Element == Point
         
         return latestPoint
     }
+    
+    func dollarValue() -> String?
+    {
+        let dollars = self.totalPoints() * 0.25
+        
+        return POINumberFormatterFactory.sharedInstance.dollarFormatter.string(from: NSNumber(value: dollars))
+    }
 }

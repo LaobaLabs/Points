@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="POIPersonDetailsViewController" customModule="Points" customModuleProvider="target">
             <connections>
+                <outlet property="dollarsLabel" destination="udP-W3-CDy" id="FEj-91-nAu"/>
                 <outlet property="removePointsButton" destination="Ues-f0-1Dg" id="Xa3-jN-ctn"/>
+                <outlet property="resetPointsButton" destination="FXL-Q4-ONt" id="35S-NM-fio"/>
                 <outlet property="totalPointsLabel" destination="VLG-kc-PGV" id="IzN-q0-pmW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLG-kc-PGV">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="VLG-kc-PGV">
                     <rect key="frame" x="0.0" y="70" width="375" height="96"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="70"/>
                     <nil key="textColor"/>
@@ -57,18 +59,39 @@
                         <action selector="handleUserPressAddPointsButton:" destination="-1" eventType="touchUpInside" id="9z7-Tg-hfL"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="27" translatesAutoresizingMaskIntoConstraints="NO" id="udP-W3-CDy">
+                    <rect key="frame" x="0.0" y="218" width="375" height="74"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="54"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXL-Q4-ONt">
+                    <rect key="frame" x="152.5" y="462" width="70" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="vdb-jR-Zcy"/>
+                    </constraints>
+                    <state key="normal" title="Reset"/>
+                    <connections>
+                        <action selector="handleUserPressedResetPointsButton:" destination="-1" eventType="touchUpInside" id="hJi-pq-aWz"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YVs-XP-Zuo" firstAttribute="centerY" secondItem="Ues-f0-1Dg" secondAttribute="centerY" id="CMq-IW-iG1"/>
+                <constraint firstItem="udP-W3-CDy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DI7-8t-WDb"/>
                 <constraint firstItem="Ues-f0-1Dg" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" constant="-50" id="HTh-tU-nEn"/>
+                <constraint firstItem="udP-W3-CDy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="JPV-L7-g4U"/>
                 <constraint firstItem="jlx-fa-tNe" firstAttribute="top" secondItem="VLG-kc-PGV" secondAttribute="bottom" constant="8" id="PMN-9y-aJJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VLG-kc-PGV" secondAttribute="trailing" id="TPB-Ey-uyr"/>
                 <constraint firstItem="VLG-kc-PGV" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="TTP-y4-Yk1"/>
+                <constraint firstItem="Ues-f0-1Dg" firstAttribute="top" secondItem="udP-W3-CDy" secondAttribute="bottom" constant="30.5" id="bG2-YD-Hvn"/>
+                <constraint firstItem="FXL-Q4-ONt" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="eD6-Hc-2rF"/>
                 <constraint firstItem="VLG-kc-PGV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ePE-g3-BTf"/>
+                <constraint firstItem="FXL-Q4-ONt" firstAttribute="top" secondItem="Ues-f0-1Dg" secondAttribute="bottom" constant="84.5" id="jDu-n6-Wq0"/>
                 <constraint firstItem="YVs-XP-Zuo" firstAttribute="leading" secondItem="Ues-f0-1Dg" secondAttribute="trailing" constant="50" id="pJ2-wW-Arp"/>
                 <constraint firstItem="jlx-fa-tNe" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="vRP-kS-H5l"/>
-                <constraint firstItem="Ues-f0-1Dg" firstAttribute="top" secondItem="jlx-fa-tNe" secondAttribute="bottom" constant="125" id="xAf-ch-bAe"/>
+                <constraint firstItem="udP-W3-CDy" firstAttribute="top" secondItem="jlx-fa-tNe" secondAttribute="bottom" constant="20.5" id="wXb-B0-NbO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

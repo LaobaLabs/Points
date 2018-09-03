@@ -15,6 +15,8 @@
 		BE00490D213CEFE50045461E /* POIPersonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00490C213CEFE50045461E /* POIPersonExtensions.swift */; };
 		BE004910213CF19B0045461E /* POIPersonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE00490E213CF19B0045461E /* POIPersonDetailsViewController.swift */; };
 		BE004911213CF19B0045461E /* POIPersonDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE00490F213CF19B0045461E /* POIPersonDetailsViewController.xib */; };
+		BE092596213D820E00D78ABC /* POINumberFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE092595213D820E00D78ABC /* POINumberFormatterFactory.swift */; };
+		BE092598213D87D400D78ABC /* POIManagedObjectContextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE092597213D87D400D78ABC /* POIManagedObjectContextExtensions.swift */; };
 		BE982FD4213CE75500AE2094 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE982FD3213CE75500AE2094 /* AppDelegate.swift */; };
 		BE982FDC213CE75500AE2094 /* Points.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE982FDA213CE75500AE2094 /* Points.xcdatamodeld */; };
 		BE982FDE213CE75600AE2094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE982FDD213CE75600AE2094 /* Assets.xcassets */; };
@@ -41,6 +43,8 @@
 		BE00490C213CEFE50045461E /* POIPersonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIPersonExtensions.swift; sourceTree = "<group>"; };
 		BE00490E213CF19B0045461E /* POIPersonDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIPersonDetailsViewController.swift; sourceTree = "<group>"; };
 		BE00490F213CF19B0045461E /* POIPersonDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = POIPersonDetailsViewController.xib; sourceTree = "<group>"; };
+		BE092595213D820E00D78ABC /* POINumberFormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POINumberFormatterFactory.swift; sourceTree = "<group>"; };
+		BE092597213D87D400D78ABC /* POIManagedObjectContextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIManagedObjectContextExtensions.swift; sourceTree = "<group>"; };
 		BE982FD0213CE75500AE2094 /* Points.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Points.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE982FD3213CE75500AE2094 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE982FDB213CE75500AE2094 /* Points.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Points.xcdatamodel; sourceTree = "<group>"; };
@@ -131,8 +135,17 @@
 			children = (
 				BE00490A213CED060045461E /* POIPointsExtensions.swift */,
 				BE00490C213CEFE50045461E /* POIPersonExtensions.swift */,
+				BE092597213D87D400D78ABC /* POIManagedObjectContextExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BE092594213D81E600D78ABC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BE092595213D820E00D78ABC /* POINumberFormatterFactory.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		BE982FC7213CE75500AE2094 = {
@@ -156,6 +169,7 @@
 		BE982FD2213CE75500AE2094 /* Points */ = {
 			isa = PBXGroup;
 			children = (
+				BE092594213D81E600D78ABC /* Helpers */,
 				BE0048FB213CE8DE0045461E /* AppDelegate */,
 				BE004909213CECDA0045461E /* Extensions */,
 				BE0048FC213CE8E30045461E /* Supporting Files */,
@@ -278,6 +292,8 @@
 			files = (
 				BE004907213CEAF80045461E /* POIListPeoplePersonTableViewCell.swift in Sources */,
 				BE00490B213CED060045461E /* POIPointsExtensions.swift in Sources */,
+				BE092596213D820E00D78ABC /* POINumberFormatterFactory.swift in Sources */,
+				BE092598213D87D400D78ABC /* POIManagedObjectContextExtensions.swift in Sources */,
 				BE004910213CF19B0045461E /* POIPersonDetailsViewController.swift in Sources */,
 				BE982FDC213CE75500AE2094 /* Points.xcdatamodeld in Sources */,
 				BE00490D213CEFE50045461E /* POIPersonExtensions.swift in Sources */,

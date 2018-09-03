@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class POIPersonDetailsViewController : UIViewController
 {
@@ -16,7 +17,9 @@ class POIPersonDetailsViewController : UIViewController
     
     //MARK: - IBOutlet
     
+    @IBOutlet weak var dollarsLabel         : UILabel!
     @IBOutlet weak var totalPointsLabel     : UILabel!
+    @IBOutlet weak var resetPointsButton    : UIButton!
     @IBOutlet weak var removePointsButton   : UIButton!
     
     init(withPerson person : Person)
@@ -43,9 +46,37 @@ class POIPersonDetailsViewController : UIViewController
     
     private func loadPoints()
     {
-        self.totalPointsLabel.text = "\(Int(self.person.allPoints().totalPoints()))"
+        self.dollarsLabel.text      = self.person.allPoints().dollarValue()
+        self.totalPointsLabel.text  = "\(Int(self.person.allPoints().totalPoints()))"
         
-        self.removePointsButton.isEnabled = self.person.allPoints().count != 0
+        let enableRemovePointsButtons = self.person.allPoints().count != 0
+        
+        self.resetPointsButton.isEnabled    = enableRemovePointsButtons
+        self.removePointsButton.isEnabled   = enableRemovePointsButtons
+    }
+    
+    private func removeAllPoints()
+    {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, let pointsSet = self.person.points else { return }
+        
+        let allPoints = self.person.allPoints()
+        
+        self.person.removeFromPoints(pointsSet)
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        managedContext.deleteObjects(allPoints)
+        
+        do
+        {
+            try  managedContext.save()
+        }
+        catch (let error)
+        {
+            print("Could not remove all points: \(error)")
+        }
+        
+        self.loadPoints()
     }
     
     //MARK: - IBAction
@@ -76,8 +107,6 @@ class POIPersonDetailsViewController : UIViewController
     
     @IBAction func handleUserPressAddPointsButton(_ sender: Any)
     {
-        print("Add")
-        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -100,5 +129,29 @@ class POIPersonDetailsViewController : UIViewController
         }
         
         self.loadPoints()
+    }
+    
+    @IBAction func handleUserPressedResetPointsButton(_ sender: Any)
+    {
+        let alertController = UIAlertController(title: "Reset?",
+                                                message: "Are you sure you want to reset all points for \(self.person.name!)? \n\n This cannot be undone.",
+                                                preferredStyle: .alert)
+        
+        let resetAction = UIAlertAction(title: "Reset",
+                                        style: .destructive)
+        { (_) in
+            self.removeAllPoints()
+        }
+        
+        alertController.addAction(resetAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel)
+        
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController,
+                     animated: true,
+                     completion: nil)
     }
 }

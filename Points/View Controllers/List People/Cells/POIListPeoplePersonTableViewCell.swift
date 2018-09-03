@@ -17,15 +17,11 @@ class POIListPeoplePersonTableViewCell : UITableViewCell
     @IBOutlet weak var personNameLabel: UILabel!
     @IBOutlet weak var pointsTotalLabel: UILabel!
     
-    override func awakeFromNib()
-    {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func setUp(withPerson person : Person)
     {
         self.personNameLabel.text   = person.name
         self.pointsTotalLabel.text  = "\(Int(person.allPoints().totalPoints()))"
+        
+        print("\(person.name!) has \(Int(person.allPoints().totalPoints())) points")
     }
 }

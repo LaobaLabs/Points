@@ -146,6 +146,7 @@ class POIListPeopleViewController : UIViewController
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
+        managedContext.deleteObjects(personToDelete.allPoints())
         managedContext.delete(personToDelete)
         
         do
@@ -219,7 +220,7 @@ extension POIListPeopleViewController : UITableViewDelegate
                                              style: .destructive,
                                              handler:
             { (_) in
-
+                self.deletePerson(person)
             })
 
             alertController.addAction(deleteAction)
