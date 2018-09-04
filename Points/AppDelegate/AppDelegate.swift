@@ -22,14 +22,17 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         
         let peopleVC = POIListPeopleViewController()
         
-        let navController = UINavigationController(rootViewController: peopleVC)
+        let navController = POINavigationController(rootViewController: peopleVC)
         
-        self.tabBarController = UITabBarController()
-        self.tabBarController?.addChildViewController(navController)
-        
-        self.window?.rootViewController = self.tabBarController
+//
+//        self.tabBarController = UITabBarController()
+//        self.tabBarController?.addChildViewController(navController)
+//
+//        self.window?.rootViewController = self.tabBarController
+        self.window?.rootViewController = navController
         
         self.window?.makeKeyAndVisible()
+        
         
         return true
     }

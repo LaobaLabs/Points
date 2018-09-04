@@ -22,6 +22,9 @@
 		BE982FDE213CE75600AE2094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE982FDD213CE75600AE2094 /* Assets.xcassets */; };
 		BE982FE1213CE75600AE2094 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE982FDF213CE75600AE2094 /* LaunchScreen.storyboard */; };
 		BE982FEC213CE75600AE2094 /* PointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE982FEB213CE75600AE2094 /* PointsTests.swift */; };
+		BEB28943213E3C120080147D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB28942213E3C120080147D /* Colors.xcassets */; };
+		BEB28945213E3CAC0080147D /* POIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB28944213E3CAC0080147D /* POIColors.swift */; };
+		BEB28948213E400D0080147D /* POINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB28947213E400D0080147D /* POINavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		BE982FE7213CE75600AE2094 /* PointsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PointsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE982FEB213CE75600AE2094 /* PointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsTests.swift; sourceTree = "<group>"; };
 		BE982FED213CE75600AE2094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEB28942213E3C120080147D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		BEB28944213E3CAC0080147D /* POIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIColors.swift; sourceTree = "<group>"; };
+		BEB28947213E400D0080147D /* POINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POINavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 		BE0048FD213CE9000045461E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BEB28946213E3FF30080147D /* Navigation Controller */,
 				BE004903213CEAB30045461E /* Person Details */,
 				BE004902213CEAAB0045461E /* List People */,
 			);
@@ -169,9 +176,10 @@
 		BE982FD2213CE75500AE2094 /* Points */ = {
 			isa = PBXGroup;
 			children = (
-				BE092594213D81E600D78ABC /* Helpers */,
 				BE0048FB213CE8DE0045461E /* AppDelegate */,
+				BEB28941213E3BFB0080147D /* Colors */,
 				BE004909213CECDA0045461E /* Extensions */,
+				BE092594213D81E600D78ABC /* Helpers */,
 				BE0048FC213CE8E30045461E /* Supporting Files */,
 				BE0048FD213CE9000045461E /* View Controllers */,
 			);
@@ -185,6 +193,23 @@
 				BE982FED213CE75600AE2094 /* Info.plist */,
 			);
 			path = PointsTests;
+			sourceTree = "<group>";
+		};
+		BEB28941213E3BFB0080147D /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				BEB28942213E3C120080147D /* Colors.xcassets */,
+				BEB28944213E3CAC0080147D /* POIColors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		BEB28946213E3FF30080147D /* Navigation Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BEB28947213E400D0080147D /* POINavigationController.swift */,
+			);
+			path = "Navigation Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +296,7 @@
 				BE004908213CEAF80045461E /* POIListPeoplePersonTableViewCell.xib in Resources */,
 				BE004911213CF19B0045461E /* POIPersonDetailsViewController.xib in Resources */,
 				BE982FE1213CE75600AE2094 /* LaunchScreen.storyboard in Resources */,
+				BEB28943213E3C120080147D /* Colors.xcassets in Resources */,
 				BE004901213CE9230045461E /* POIListPeopleViewController.xib in Resources */,
 				BE982FDE213CE75600AE2094 /* Assets.xcassets in Resources */,
 			);
@@ -294,8 +320,10 @@
 				BE00490B213CED060045461E /* POIPointsExtensions.swift in Sources */,
 				BE092596213D820E00D78ABC /* POINumberFormatterFactory.swift in Sources */,
 				BE092598213D87D400D78ABC /* POIManagedObjectContextExtensions.swift in Sources */,
+				BEB28945213E3CAC0080147D /* POIColors.swift in Sources */,
 				BE004910213CF19B0045461E /* POIPersonDetailsViewController.swift in Sources */,
 				BE982FDC213CE75500AE2094 /* Points.xcdatamodeld in Sources */,
+				BEB28948213E400D0080147D /* POINavigationController.swift in Sources */,
 				BE00490D213CEFE50045461E /* POIPersonExtensions.swift in Sources */,
 				BE004900213CE9230045461E /* POIListPeopleViewController.swift in Sources */,
 				BE982FD4213CE75500AE2094 /* AppDelegate.swift in Sources */,
