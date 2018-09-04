@@ -21,7 +21,5 @@ class POIListPeoplePersonTableViewCell : UITableViewCell
     {
         self.personNameLabel.text   = person.name
         self.pointsTotalLabel.text  = "\(Int(person.allPoints().totalPoints()))"
-        
-        print("\(person.name!) has \(Int(person.allPoints().totalPoints())) points")
     }
 }

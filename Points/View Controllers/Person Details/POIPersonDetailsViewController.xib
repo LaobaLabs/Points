@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="POIPersonDetailsViewController" customModule="Points" customModuleProvider="target">
             <connections>
+                <outlet property="addPointsButton" destination="YVs-XP-Zuo" id="gJY-R6-VYg"/>
                 <outlet property="dollarsLabel" destination="udP-W3-CDy" id="FEj-91-nAu"/>
                 <outlet property="removePointsButton" destination="Ues-f0-1Dg" id="Xa3-jN-ctn"/>
                 <outlet property="resetPointsButton" destination="FXL-Q4-ONt" id="35S-NM-fio"/>
@@ -43,17 +44,18 @@
                         <constraint firstAttribute="width" secondItem="Ues-f0-1Dg" secondAttribute="height" multiplier="1:1" id="dFj-O3-Q1v"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                    <state key="normal" title="-"/>
+                    <state key="normal" title="↺"/>
                     <connections>
                         <action selector="handleUserPressedRemovePointsButton:" destination="-1" eventType="touchUpInside" id="cbV-JP-vVY"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-XP-Zuo">
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-XP-Zuo">
                     <rect key="frame" x="215" y="322.5" width="55" height="55"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="YVs-XP-Zuo" secondAttribute="height" multiplier="1:1" id="RPz-kq-Ex9"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="+"/>
                     <connections>
                         <action selector="handleUserPressAddPointsButton:" destination="-1" eventType="touchUpInside" id="9z7-Tg-hfL"/>

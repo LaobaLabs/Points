@@ -213,7 +213,7 @@ extension POIListPeopleViewController : UITableViewDelegate
             guard let personName = person.name else { return }
             
             let alertController = UIAlertController(title: "Delete?",
-                                                    message: "Are you sure you want to delete \(personName)? This cannot be undone.",
+                                                    message: "Are you sure you want to delete \(personName)? \n\n This cannot be undone.",
                                                     preferredStyle: .alert)
             
             let deleteAction = UIAlertAction(title: "Delete",

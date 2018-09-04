@@ -30,12 +30,12 @@ extension Array where Element == Point
         {
             if let loopPointDate = loopPoint.dateGiven
             {
-                if  let latestPoint = latestPoint,
-                    let latestPointDate = latestPoint.dateGiven
+                if let latestPointDate = latestPoint?.dateGiven
                 {
                     switch loopPointDate.compare(latestPointDate)
                     {
                         case .orderedDescending:
+                            latestPoint = loopPoint
                             break
                         default:
                             break

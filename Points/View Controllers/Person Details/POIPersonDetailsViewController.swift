@@ -11,14 +11,32 @@ import CoreData
 
 class POIPersonDetailsViewController : UIViewController
 {
-    private let person : Person
+    private let person              : Person
     
-    override var hidesBottomBarWhenPushed: Bool { get { return true } set { self.hidesBottomBarWhenPushed = newValue} }
+    //Points picker related views
+    private var shadowView          : UIView?
+    private var hiddenTextField     : UITextField?
+    private var pointsPickerView    : UIPickerView?
+    
+    override var hidesBottomBarWhenPushed: Bool
+    {
+        get
+        {
+            return true
+        }
+        
+        set
+        {
+            self.hidesBottomBarWhenPushed = newValue
+        }
+    }
     
     //MARK: - IBOutlet
     
     @IBOutlet weak var dollarsLabel         : UILabel!
     @IBOutlet weak var totalPointsLabel     : UILabel!
+
+    @IBOutlet weak var addPointsButton      : UIButton!
     @IBOutlet weak var resetPointsButton    : UIButton!
     @IBOutlet weak var removePointsButton   : UIButton!
     
@@ -40,9 +58,31 @@ class POIPersonDetailsViewController : UIViewController
         super.viewDidLoad()
         
         self.title = self.person.name
+        
+        self.setUpButtons()
 
         self.loadPoints()
     }
+    
+    private func setUpButtons()
+    {
+        let buttonsArray : [UIButton] = [self.addPointsButton,removePointsButton]
+        
+        for button in buttonsArray
+        {
+            button.layer.borderWidth    = 2.0
+            button.layer.borderColor    = button.tintColor.cgColor
+            button.layer.cornerRadius   = button.frame.size.width / 2.0
+            button.layer.masksToBounds  = true
+        }
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
+                                                                      action: #selector(self.handleUserDidLongPressOnAddPointsButton))
+        
+        self.addPointsButton.addGestureRecognizer(longPressGestureRecognizer)
+    }
+    
+    //MARK: - Points management
     
     private func loadPoints()
     {
@@ -53,7 +93,35 @@ class POIPersonDetailsViewController : UIViewController
         
         self.resetPointsButton.isEnabled    = enableRemovePointsButtons
         self.removePointsButton.isEnabled   = enableRemovePointsButtons
+        self.removePointsButton.layer.borderColor = enableRemovePointsButtons == true ? self.removePointsButton.tintColor.cgColor : UIColor.gray.cgColor
     }
+    
+    private func addPointsToUser(withPointValue pointValue : Double)
+    {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let newPoint = Point(context: managedContext)
+        newPoint.value      = pointValue
+        newPoint.dateGiven  = Date()
+        
+        managedContext.insert(newPoint)
+        
+        self.person.addToPoints(newPoint)
+        
+        do
+        {
+            try  managedContext.save()
+        }
+        catch (let error)
+        {
+            print("Could not save new point: \(error)")
+        }
+        
+        self.loadPoints()
+    }
+    
     
     private func removeAllPoints()
     {
@@ -77,6 +145,85 @@ class POIPersonDetailsViewController : UIViewController
         }
         
         self.loadPoints()
+    }
+    
+    //MARK: - #selctor methods
+    
+    @objc private func handleUserTappedOutsideOfPickerView()
+    {
+        if self.hiddenTextField?.isFirstResponder == true
+        {
+            self.shadowView?.removeFromSuperview()
+            self.hiddenTextField?.resignFirstResponder()
+        }
+    }
+    
+    @objc private func handleUserSelectedPointsFromPicker()
+    {
+        guard let pickerView = self.pointsPickerView else { return }
+        
+        self.addPointsToUser(withPointValue: Double(pickerView.selectedRow(inComponent: 0)))
+        self.handleUserTappedOutsideOfPickerView()
+        self.pointsPickerView?.selectRow(0, inComponent: 0, animated: false)
+    }
+    
+    @objc private func handleUserDidLongPressOnAddPointsButton()
+    {
+        guard self.hiddenTextField?.isFirstResponder == false || self.hiddenTextField == nil else { return }
+        
+        if self.hiddenTextField == nil
+        {
+            let pickerView = UIPickerView(frame: .zero)
+            pickerView.delegate     = self
+            pickerView.dataSource   = self
+            
+            pointsPickerView = pickerView
+            
+            let toolBar = UIToolbar()
+            toolBar.barStyle = .default
+            toolBar.isTranslucent = true
+            toolBar.tintColor = self.view.tintColor
+            toolBar.sizeToFit()
+            
+            let doneButton = UIBarButtonItem(title: "Give Points",
+                                             style:.done,
+                                             target: self,
+                                             action:#selector(self.handleUserSelectedPointsFromPicker))
+            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                              target: nil,
+                                              action: nil)
+            let cancelButton = UIBarButtonItem(title: "Cancel",
+                                               style: .plain,
+                                               target: self,
+                                               action: #selector(self.handleUserTappedOutsideOfPickerView))
+            
+            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+            toolBar.isUserInteractionEnabled = true
+            
+            let textField = UITextField(frame: .zero)
+            textField.inputView             = pickerView
+            textField.inputAccessoryView    = toolBar
+            
+            self.view.addSubview(textField)
+            
+            self.hiddenTextField = textField
+        }
+        
+        let shadowView = UIView(frame: self.view.bounds)
+        shadowView.backgroundColor = .black
+        shadowView.alpha = 0.40
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                          action: #selector(self.handleUserTappedOutsideOfPickerView))
+        shadowView.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.view.addSubview(shadowView)
+        
+        self.shadowView = shadowView
+        
+        guard let textField = self.hiddenTextField else { return }
+        
+        textField.becomeFirstResponder()
     }
     
     //MARK: - IBAction
@@ -107,28 +254,7 @@ class POIPersonDetailsViewController : UIViewController
     
     @IBAction func handleUserPressAddPointsButton(_ sender: Any)
     {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let newPoint = Point(context: managedContext)
-        newPoint.value = 1.0
-        newPoint.dateGiven = Date()
-        
-        managedContext.insert(newPoint)
-        
-        self.person.addToPoints(newPoint)
-        
-        do
-        {
-            try  managedContext.save()
-        }
-        catch (let error)
-        {
-            print("Could not save new point: \(error)")
-        }
-        
-        self.loadPoints()
+        self.addPointsToUser(withPointValue: 1.0)
     }
     
     @IBAction func handleUserPressedResetPointsButton(_ sender: Any)
@@ -153,5 +279,33 @@ class POIPersonDetailsViewController : UIViewController
         self.present(alertController,
                      animated: true,
                      completion: nil)
+    }
+}
+
+extension POIPersonDetailsViewController : UIPickerViewDataSource
+{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        return 100
+    }
+}
+
+extension POIPersonDetailsViewController : UIPickerViewDelegate
+{
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        if row == 0
+        {
+            return "How many points to give?"
+        }
+        else
+        {
+            return "\(row)"
+        }
     }
 }
